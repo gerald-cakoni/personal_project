@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="body">
+  <nav class="d-flex navbar1 justify-content-between">
+    <h1>Welcome {{loggedUser.first_name}} {{loggedUser.last_name}}</h1>
+
+      <div class="d-flex justify-content-between">
+        <a href="/" class="btn btn-light me-3">Home</a>  
+        <a class="btn btn-danger" href="/logout">Logout</a>
+    </div>
+  </nav>
+    <div class="p-5 bc one-div">
+        <img class="image-one" src="..\static\UPLOAD_FOLDER\{{product.image}}" alt="Image">
+        <div>
+            <h3>Name: {{product.name}}</h3>
+            <h3>Description: {{product.id}}</h3>
+            <h3>Price: {{product.price}} $</h3>
+            <h3>Nr of saves: {{savesNr|length}}</h3>
+            <h3>{{product.num_saves}}</h3>
+            {% if loggedUser.id == product.user_id %}
+            <a class="btn btn-warning"  href="/edit/product/{{product.id}}">Edit</a>
+            <a class="btn btn-danger"  href="/delete/product/{{product.id}}">Delete</a>
+            {% endif %}
+
+            {% if loggedUser.id != product.user_id %}
+            <a class="btn btn-danger" href="/delete/product/{{product.id}}">Buy</a>
+            
+            {{savedProduct}}
+            {% if product.id in savedproducts  %}
+            <a class="btn btn-warning" href="/unsave/{{product.id}}">Unsave</a>
+            {% else %}
+                <a class="btn btn-primary" href="/save/{{product.id}}">Save</a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <footer class="footer-dashboard">
+
+        <ul class="ul">About Us:
+            <li>We offer you a free space to upload and sell your products. You can also explore others products to buy.</li>
+    
+        </ul>
+    
+        <ul class="ul">Contact:
+            <li>Email: marketplace@gmail.com</li>
+            <li>Phone: +355692222000</li>
+            <li>Address: Square Mother Tereza, 12, 1011</li>
+        </ul>
+    
+    </footer>
+</body>
+</html>

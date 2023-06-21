@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="body">
+  <nav class="d-flex navbar1 justify-content-between">
+    <h1>Welcome {{loggedUser.first_name}} {{loggedUser.last_name}}</h1>
+
+      <div class="d-flex justify-content-between">
+        <a href="/" class="btn btn-light me-3">Home</a>  
+        <a class="btn btn-danger" href="/logout">Logout</a>
+    </div>
+  </nav>
+    <form enctype="multipart/form-data" class="w-50 m-auto p-5 border rounded  bg-light  mt-3" action="/edit/product/{{product.id}}" method="post">
+        <h2 class="text-center">Edit Product</h2>
+        <div class="form-row">
+            <label  for="name">Product Name:</label>
+            <input type="text" value="{{product.name}}" class="form-control" name="name" placeholder="Enter product Name">
+        </div>
+        {% with messages = get_flashed_messages(category_filter=["nameProduct"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-danger text-center">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="form-row">
+          <label  for="category">Product Category:</label><br>
+          <input type="radio" name="category" value="{{product.category}}">
+          <label for="Technology">Technology</label><br>
+          <input type="radio" name="category" value="{{product.category}}">
+          <label for="Sport">Sport</label><br>
+          <input type="radio" name="category" value="{{product.category}}">
+          <label for="Furniture">Furniture</label><br>
+          <input type="radio" name="category" value="{{product.category}}">
+          <label for="Else">Else</label><br>
+
+      {% with messages = get_flashed_messages(category_filter=["categoryProduct"]) %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="text-danger text-center">{{message}}</p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+        <div class="form-row">
+          <label  for="price">Product Price:</label>
+          <input type="text" class="form-control" value="{{product.price}}" name="price" placeholder="Enter product price">
+      </div>
+      {% with messages = get_flashed_messages(category_filter=["priceProduct"]) %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="text-danger text-center">{{message}}</p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+        <div class="form-row">
+            <label  for="image">Product Image:</label>
+            <input type="file" value="{{product.image}}" class="form-control" name="image" placeholder="Enter product Image">
+        </div>
+        {% with messages = get_flashed_messages(category_filter=["imageProduct"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-danger text-center">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="form-row">
+            <label  for="description">Product Description:</label>
+            <textarea class="form-control" name="description" cols="30" rows="10">{{product.description}}</textarea>
+        </div>
+        {% with messages = get_flashed_messages(category_filter=["descriptionProduct"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <p class="text-danger text-center">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <button class="mt-2 btn btn-success">Edit Product</button>
+    </form>
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</html> 

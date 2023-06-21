@@ -1,0 +1,19 @@
+.1{
+  width: 600px;
+  height: auto;
+  background-color: black;
+  color: white;
+}
+
+.bg-logi{
+  width: 50%;
+  text-align: center;
+  margin: 20%;
+  border-radius: 5%;
+  box-shadow: 7px 7px rgb(188, 181, 181);
+  background-color: rgb(188, 181, 181);
+}
+
+bod{
+  background-color: black;
+}
